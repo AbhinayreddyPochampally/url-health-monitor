@@ -540,71 +540,74 @@ export default function UrlHealthMonitor() {
                       className="flex items-center justify-between p-4 bg-gray-750 hover:bg-gray-700 transition-colors cursor-pointer"
                       onClick={() => toggleUrlExpansion(url.url)}
                     >
-                      <div className="flex items-center gap-4 flex-1">
-                        <div
-                          className={`w-4 h-4 rounded-full ${
-                            url.status === "UP"
-                              ? "bg-green-400"
-                              : url.status === "DOWN"
-                                ? "bg-red-500"
-                                : "bg-blue-400 animate-pulse"
-                          }`}
-                        />
-                        <div className="flex-1 min-w-0">
-                          <p className="font-medium text-white truncate">{url.url}</p>
-                          <p className="text-sm text-gray-400">
-                            Last checked: {new Date(url.lastChecked).toLocaleTimeString()}
-                          </p>
-                        </div>
-                      </div>
+                      <div className="flex items-center gap-4 flex-1 min-w-0">
+  <div
+    className={`w-4 h-4 rounded-full flex-shrink-0 ${
+      url.status === "UP"
+        ? "bg-green-400"
+        : url.status === "DOWN"
+          ? "bg-red-500"
+          : "bg-blue-400 animate-pulse"
+    }`}
+  />
+  <div className="flex-1 min-w-0 max-w-md">
+    <p className="font-medium text-white truncate" title={url.url}>
+      {url.url}
+    </p>
+    <p className="text-sm text-gray-400">
+      Last checked: {new Date(url.lastChecked).toLocaleTimeString()}
+    </p>
+  </div>
+</div>
 
-                      <div className="flex items-center gap-4">
-                        {url.responseTime && (
-                          <div className="text-right">
-                            <p className="text-sm text-gray-400">Response</p>
-                            <p className="font-medium text-blue-400">{url.responseTime}ms</p>
-                          </div>
-                        )}
+<div className="flex items-center gap-2 flex-shrink-0">
+  {url.responseTime && (
+    <div className="text-right hidden sm:block">
+      <p className="text-xs text-gray-400">Response</p>
+      <p className="font-medium text-blue-400 text-sm">{url.responseTime}ms</p>
+    </div>
+  )}
 
-                        <div className="text-right">
-                          <p className="text-sm text-gray-400">Uptime</p>
-                          <p className="font-medium text-green-400">{url.uptime.toFixed(1)}%</p>
-                        </div>
+  <div className="text-right hidden sm:block">
+    <p className="text-xs text-gray-400">Uptime</p>
+    <p className="font-medium text-green-400 text-sm">{url.uptime.toFixed(1)}%</p>
+  </div>
 
-                        <Badge className={getStatusColor(url.status)}>{url.status}</Badge>
+  <Badge className={getStatusColor(url.status)} size="sm">{url.status}</Badge>
 
-                        <Button
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            checkSingleUrl(url.id, url.url)
-                          }}
-                          variant="outline"
-                          size="sm"
-                          disabled={url.status === "CHECKING"}
-                          className="border-green-600 text-green-400 hover:bg-green-600 hover:text-white"
-                        >
-                          <RefreshCw className={`w-3 h-3 mr-1 ${url.status === "CHECKING" ? "animate-spin" : ""}`} />
-                          Check
-                        </Button>
+  <Button
+    onClick={(e) => {
+      e.stopPropagation()
+      checkSingleUrl(url.id, url.url)
+    }}
+    variant="outline"
+    size="sm"
+    disabled={url.status === "CHECKING"}
+    className="border-green-600 text-green-400 hover:bg-green-600 hover:text-white px-2"
+  >
+    <RefreshCw className={`w-3 h-3 ${url.status === "CHECKING" ? "animate-spin" : ""}`} />
+    <span className="hidden md:inline ml-1">Check</span>
+  </Button>
 
-                        <Button
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            removeUrl(url.id)
-                          }}
-                          variant="outline"
-                          size="sm"
-                          className="border-red-600 text-red-400 hover:bg-red-600 hover:text-white"
-                        >
-                          Remove
-                        </Button>
+  <Button
+    onClick={(e) => {
+      e.stopPropagation()
+      removeUrl(url.id)
+    }}
+    variant="outline"
+    size="sm"
+    className="border-red-600 text-red-400 hover:bg-red-600 hover:text-white px-2"
+  >
+    <span className="hidden md:inline">Remove</span>
+    <span className="md:hidden">×</span>
+  </Button>
 
-                        {expandedUrl === url.url ? (
-                          <ChevronUp className="w-5 h-5 text-gray-400" />
-                        ) : (
-                          <ChevronDown className="w-5 h-5 text-gray-400" />
-                        )}
-                      </div>
+  {expandedUrl === url.url ? (
+    <ChevronUp className="w-4 h-4 text-gray-400 flex-shrink-0" />
+  ) : (
+    <ChevronDown className="w-4 h-4 text-gray-400 flex-shrink-0" />
+  )}
+</div>
                     </div>
 
                     {/* Expanded metrics view */}

@@ -2,55 +2,25 @@
 
 -- Insert sample URLs for testing
 INSERT INTO monitored_urls (url, uptime_percentage) VALUES 
-    ('https://google.com', 99.9),
-    ('https://github.com', 98.5),
-    ('https://stackoverflow.com', 99.2),
-    ('https://vercel.com', 99.8),
-    ('https://example-down-site.com', 45.2)
+    ('', 0)
 ON DUPLICATE KEY UPDATE 
     updated_at = CURRENT_TIMESTAMP,
     uptime_percentage = VALUES(uptime_percentage);
 
 -- Get the URL IDs for seeding health checks
-SET @google_id = (SELECT id FROM monitored_urls WHERE url = 'https://google.com');
-SET @github_id = (SELECT id FROM monitored_urls WHERE url = 'https://github.com');
-SET @stackoverflow_id = (SELECT id FROM monitored_urls WHERE url = 'https://stackoverflow.com');
-SET @vercel_id = (SELECT id FROM monitored_urls WHERE url = 'https://vercel.com');
-SET @down_id = (SELECT id FROM monitored_urls WHERE url = 'https://example-down-site.com');
+SET @google_id = (SELECT id FROM monitored_urls WHERE url = '');
+SET @github_id = (SELECT id FROM monitored_urls WHERE url = '');
+SET @stackoverflow_id = (SELECT id FROM monitored_urls WHERE url = '');
+SET @vercel_id = (SELECT id FROM monitored_urls WHERE url = '');
+SET @down_id = (SELECT id FROM monitored_urls WHERE url = '');
 
 -- Insert sample health check data (last 24 hours)
 INSERT INTO url_health_checks (url_id, status, response_time, status_code, checked_at) VALUES
-    -- Google (mostly up, fast responses)
-    (@google_id, 'UP', 120, 200, NOW() - INTERVAL 1 HOUR),
-    (@google_id, 'UP', 115, 200, NOW() - INTERVAL 2 HOUR),
-    (@google_id, 'UP', 130, 200, NOW() - INTERVAL 3 HOUR),
-    (@google_id, 'UP', 125, 200, NOW() - INTERVAL 4 HOUR),
-    (@google_id, 'UP', 118, 200, NOW() - INTERVAL 5 HOUR),
-    
-    -- GitHub (mostly up with occasional issues)
-    (@github_id, 'UP', 89, 200, NOW() - INTERVAL 1 HOUR),
-    (@github_id, 'DOWN', NULL, 503, NOW() - INTERVAL 2 HOUR),
-    (@github_id, 'UP', 95, 200, NOW() - INTERVAL 3 HOUR),
-    (@github_id, 'UP', 88, 200, NOW() - INTERVAL 4 HOUR),
-    (@github_id, 'UP', 92, 200, NOW() - INTERVAL 5 HOUR),
-    
-    -- StackOverflow (consistently up, moderate speed)
-    (@stackoverflow_id, 'UP', 200, 200, NOW() - INTERVAL 1 HOUR),
-    (@stackoverflow_id, 'UP', 195, 200, NOW() - INTERVAL 2 HOUR),
-    (@stackoverflow_id, 'UP', 210, 200, NOW() - INTERVAL 3 HOUR),
-    (@stackoverflow_id, 'UP', 205, 200, NOW() - INTERVAL 4 HOUR),
-    
-    -- Vercel (consistently up, very fast)
-    (@vercel_id, 'UP', 45, 200, NOW() - INTERVAL 1 HOUR),
-    (@vercel_id, 'UP', 50, 200, NOW() - INTERVAL 2 HOUR),
-    (@vercel_id, 'UP', 48, 200, NOW() - INTERVAL 3 HOUR),
-    (@vercel_id, 'UP', 52, 200, NOW() - INTERVAL 4 HOUR),
-    
-    -- Down site (consistently down)
-    (@down_id, 'DOWN', NULL, 0, NOW() - INTERVAL 1 HOUR),
-    (@down_id, 'DOWN', NULL, 0, NOW() - INTERVAL 2 HOUR),
-    (@down_id, 'DOWN', NULL, 0, NOW() - INTERVAL 3 HOUR),
-    (@down_id, 'DOWN', NULL, 0, NOW() - INTERVAL 4 HOUR);
+    (@google_id, '', 0, 0, NOW()),
+    (@github_id, '', 0, 0, NOW()),
+    (@stackoverflow_id, '', 0, 0, NOW()),
+    (@vercel_id, '', 0, 0, NOW()),
+    (@down_id, '', 0, 0, NOW());
 
 -- Calculate and insert statistics
 INSERT INTO url_statistics (
