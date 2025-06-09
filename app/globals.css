@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 142.1 76.2% 36.3%;
+    --primary-foreground: 355.7 100% 97.3%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 142.1 76.2% 36.3%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom solid background for gray-750 */
+.bg-gray-750 {
+  background-color: rgb(55, 65, 81);
+}
+
+/* Simple scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(17, 24, 39);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(59, 130, 246);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(37, 99, 235);
+}
+
+/* Clean transition effects */
+.transition-colors {
+  transition-property: color, background-color, border-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+/* Focus states */
+.focus\:border-blue-400:focus {
+  border-color: rgb(96, 165, 250);
+}
+
+/* Button hover effects */
+.hover\:bg-green-700:hover {
+  background-color: rgb(21, 128, 61);
+}
+
+.hover\:bg-blue-600:hover {
+  background-color: rgb(37, 99, 235);
+}
+
+.hover\:bg-red-600:hover {
+  background-color: rgb(220, 38, 38);
+}
+
+.hover\:bg-gray-700:hover {
+  background-color: rgb(55, 65, 81);
+}
+
+.hover\:text-white:hover {
+  color: rgb(255, 255, 255);
+}

@@ -1,0 +1,56 @@
+# Dependencies
+node_modules
+npm-debug.log*
+
+# Next.js build output (we'll copy .next from the builder stage)
+# .next
+out
+
+# Environment files (except production)
+.env*.local
+!.env.production
+
+# Development files
+.git
+.gitignore
+.vscode
+.idea
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test and coverage
+**/*.test.*
+**/*.spec.*
+coverage
+
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Optional npm cache directory
+.npm
+
+# Local development
+.turbo
+.vercel
+.next/cache
+
+# Optional eslint cache
+.eslintcache
+
+# Yarn
+yarn-error.log
+.yarn-integrity
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
