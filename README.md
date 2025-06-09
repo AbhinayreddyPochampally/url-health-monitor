@@ -2,9 +2,6 @@
 
 A modern,  website monitoring solution built with Next.js 14, TypeScript, and Docker. Monitor website status, track response times, and analyze historical uptime metrics through an intuitive dashboard.
 
-![URL Monitor Dashboard](/public/screenshot.png)
-
-[**🚀 Live Demo**](https://url-health-monitor.vercel.app) (Coming Soon!)
 
 ## ✨ Features
 
@@ -26,12 +23,6 @@ A modern,  website monitoring solution built with Next.js 14, TypeScript, and Do
 - **Icons**: [Lucide React](https://lucide.dev/)
 - **Containerization**: [Docker](https://www.docker.com/)
 - **Runtime**: [Node.js](https://nodejs.org/) 18+
-
-## 📱 Live Demo
-
-Check out the live demo of the application:
-
-[![Live Demo](https://img.shields.io/badge/🚀-Live_Demo-4CAF50?style=for-the-badge&logo=vercel&logoColor=white)](https://url-health-monitor.vercel.app)
 
 ## 🚀 Quick Start
 
