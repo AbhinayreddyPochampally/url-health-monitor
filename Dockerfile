@@ -10,8 +10,11 @@ RUN apk add --no-cache curl libc6-compat
 # Copy package files
 COPY package*.json ./
 
+# Remove existing package-lock.json to ensure fresh dependency resolution for Alpine
+RUN rm -f package-lock.json
+
 # Install all dependencies including devDependencies
-RUN npm ci --legacy-peer-deps
+RUN npm install --legacy-peer-deps
 
 # Copy the rest of the application
 COPY . .
