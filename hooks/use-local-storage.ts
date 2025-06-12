@@ -31,7 +31,19 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
       if (typeof window !== "undefined") {
         const item = window.localStorage.getItem(key)
         if (item) {
-          setStoredValue(JSON.parse(item))
+          const parsedValue = JSON.parse(item)
+          
+          // Sanitize data for url-monitor-data to ensure arrays exist
+          if (key === 'url-monitor-data' && Array.isArray(parsedValue)) {
+            const sanitizedValue = parsedValue.map((url: any) => ({
+              ...url,
+              tags: Array.isArray(url.tags) ? url.tags : [],
+              history: Array.isArray(url.history) ? url.history : []
+            }))
+            setStoredValue(sanitizedValue)
+          } else {
+            setStoredValue(parsedValue)
+          }
         }
       }
     } catch (error) {
